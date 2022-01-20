@@ -10,13 +10,10 @@ class App extends Component{
       <Routes>
         <Route exact path="/favoritespage" element={<FavoriteUsers/>}>        
         </Route>
-        
         <Route exact path="/home" element={<Main/>}>        
         </Route>
-
-         <Route exact path="/" element={<Main/>}>        
+        <Route exact path="/" element={<Main/>}>        
         </Route>
-        
       </Routes>
       </BrowserRouter>
     )
