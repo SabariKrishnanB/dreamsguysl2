@@ -7,8 +7,6 @@ import { fetchData, ManageFav, SearchTerm } from './actions'
 import {Link} from 'react-router-dom';
 import Pagination from '@material-ui/lab/Pagination';
 
-
-
 class Main extends Component {
 
   state = {
@@ -21,9 +19,7 @@ class Main extends Component {
     offset: 0
   };
 
-  componentDidMount() {
-
-     
+  componentDidMount() {    
 
     this.props.onFetchData()
     this.fakeRequest().then(() => {
@@ -44,40 +40,32 @@ class Main extends Component {
   }
 
   onChangeSearchInput=e=>{
-     console.log(e.target.value);
      this.props.SearchTerm(e.target.value.toLowerCase(), this.props.data)
   }
 
 
   handlePagination = (e, page) => {
-    console.log('=====', page)
     this.setState({currentPage: page})
   }
 
   render() {
-         const{search}=this.state;
     if (this.state.loading) {
       return null; 
     }
-    console.log('=================', this.props.data.data);
 
-    return (
-      
-       
+    return (  
       <div className="App">
         <div className='container'>
-          <div>
-        <h1>Fetching the data from the backend</h1>
-        <div className='sameline1'>
-        <input type="text" placeholder='Search for the user...' onChange={this.onChangeSearchInput}name="SearchQuery" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <div>
+          <h1>Fetching the data from the backend</h1>
+          <div className='sameline1'>
+          <input type="text" placeholder='Search for the user...' onChange={this.onChangeSearchInput}name="SearchQuery" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </div>
+         <div className='sameline2'>
+          <Link to="/favoritespage">Favorite Users</Link>
+         </div>
         </div>
-        <div className='sameline2'>
-        <Link to="/favoritespage">Favorite Users</Link>
-        </div>
-        </div>
-        
-        {this.props.error && <p>{this.props.error}</p>}
-        
+        {this.props.error && <p>{this.props.error}</p>}        
         {this.props.data.data.map((u, i)=>
           u.visible && u.visible 
           && i+1 <= this.state.currentPage * this.state.perPage 
@@ -93,15 +81,14 @@ class Main extends Component {
               </div>
               <br></br>
               <button class="FavButton" onClick={()=>{this.onClickk(u.id)}}>{u.fav && u.fav?'Remove from Fav':'Add to Fav'}</button>
-              
             </div>)}
        </div>
        {/**Pagination starts */}
       <div class="pagination"> <Pagination 
-      count={this.props.data.data.length/this.state.perPage} 
-      onChange={this.handlePagination}
-      /></div>
-        </div> 
+       count={this.props.data.data.length/this.state.perPage} 
+       onChange={this.handlePagination}/>
+      </div>
+    </div> 
       
     );
   }
