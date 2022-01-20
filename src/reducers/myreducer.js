@@ -5,9 +5,7 @@ const intialState = {
 }
 
 const reducer = (state = intialState, action) => {
-console.log("----***", action)
     switch (action.type) {       
-        
         case "FetchData":
             return { ...state, data: action.data }
         case "ManageFav":
