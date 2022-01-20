@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
 import {Link,Switch,Routes,Route,BrowserRouter} from 'react-router-dom';
-
-
 import FavoriteUsers from './actions/FavoriteUsers';
 import Main from './actions/Main';
 
